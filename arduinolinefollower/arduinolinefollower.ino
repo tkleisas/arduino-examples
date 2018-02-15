@@ -11,7 +11,7 @@
 #define RM1 9       // right motor
 #define RM2 6       // right motor
 #define MOTOR_SPEED 128
-int motorSpeed = 128; // speed at 50% so that we have time to turn
+int motorSpeed = 180; // speed at 50% so that we have time to turn
 void setup()
 {
   pinMode(LS, INPUT);
@@ -32,9 +32,9 @@ void loop()
   Serial.println();
   if(digitalRead(LS)==0 && digitalRead(RS)==0)     // the edge sensors are white so move on
   {
-    analogWrite(LM1,motorSpeed); //both motors on 
+    analogWrite(LM1,(motorSpeed*2)/3); //both motors on 
     analogWrite(LM2, 0);
-    analogWrite(RM1, motorSpeed);
+    analogWrite(RM1, (motorSpeed*2)/3);
     analogWrite(RM2, 0);
   }
   if(digitalRead(CS)==1) // the center sensor tracks black
@@ -47,7 +47,7 @@ void loop()
   
   if((!digitalRead(LS)) && digitalRead(RS))   // the left sensor tracks black so turn right
   {
-    analogWrite(LM1,motorSpeed);
+    analogWrite(LM1,(motorSpeed*3)/4);
     analogWrite(LM2,0);
     analogWrite(RM1,0);
     analogWrite(RM2,0);
@@ -57,7 +57,7 @@ void loop()
   {
     analogWrite(LM1, 0);
     analogWrite(LM2,0);
-    analogWrite(RM1,motorSpeed);
+    analogWrite(RM1,(motorSpeed*3)/4);
     analogWrite(RM2,0);
   }
   
